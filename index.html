@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- tailwindcss -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZmK9OlkOP+XkYDH5Rbf+eJkUe3C4xOA2rMbo6q2P7sFo9Wsl6V9fXhMZyTnU8zY5P4g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Medical Website 💉🩺</title>
+    <style>
+        /* Custom animations */
+        @keyframes floatIn {
+            0% { opacity: 0; transform: translateX(20px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-floatIn {
+            animation: floatIn 0.8s ease-out;
+        }
+        
+        /* Custom styles for dark mode */
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        .dark .text-gray-600 {
+            color: #e2e8f0;
+        }
+        
+        .dark .text-gray-900 {
+            color: #f7fafc;
+        }
+        
+        .dark .bg-gray-50 {
+            background-color: #2d3748;
+        }
+        
+        .dark .bg-gray-100 {
+            background-color: #4a5568;
+        }
+        
+        .dark .border-gray-200 {
+            border-color: #4a5568;
+        }
+        
+        .dark .border-gray-300 {
+            border-color: #4a5568;
+        }
+        
+        .dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Ensure blue elements stay blue in dark mode */
+        .dark .text-blue-500,
+        .dark .text-blue-600,
+        .dark .text-blue-700,
+        .dark .text-blue-800 {
+            color: inherit;
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="bg-white transition-colors duration-300">
+    <!-- main -->
+    <!-- navbar -->
+    <header class="text-gray-600 body-font sticky top-0 z-50 bg-white shadow-md dark:bg-gray-800" id="home">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0 dark:text-white">
+                <img src="./assets/images/logo (1).png" alt="" class="h-10">
+            </a>
+            
+            <!-- Mobile menu button -->
+            <button class="md:hidden ml-auto p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 focus:outline-none" id="mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
+            <nav class="hidden md:flex md:ml-auto md:mr-auto flex-wrap items-center text-base justify-center">
+                <a class="mr-5 hover:text-gray-900 text-blue-700 font-medium hover:cursor-pointer">HOME</a>
+                <a href="#services" class="mr-5 hover:text-gray-900 text-blue-700 font-medium hover:underline hover:cursor-pointer">SERVICES</a>
+                <a href="#about" class="mr-5 hover:text-gray-900 text-blue-700 font-medium hover:underline hover:cursor-pointer">ABOUT US</a>
+                <a href="#platform" class="mr-5 hover:text-gray-900 text-blue-700 font-medium hover:underline hover:cursor-pointer">Platform</a>
+                <a href="#testinomial" class="mr-5 hover:text-gray-900 text-blue-700 font-medium hover:underline hover:cursor-pointer">Testinomial</a>
+                <a href="#doctor" class="mr-5 hover:text-gray-900 text-blue-700 font-medium hover:underline hover:cursor-pointer">FIND DOCTOR</a>
+                <a href="#contact" class="mr-5 hover:text-gray-900 text-blue-700 font-medium hover:underline hover:cursor-pointer">CONTACT US</a>
+            </nav>
+            
+            <div class="hidden md:flex items-center">
+                <button 
+                    id="toggle-btn"
+                    class="inline-flex items-center py-2 px-6 text-lg font-semibold rounded-lg 
+                            text-white shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800 dark:bg-yellow-400 dark:text-gray-800">
+                    <span id="theme-icon">🌙</span>
+                </button>
+
+                <button class="inline-flex items-center py-2 px-6 
+                text-lg font-semibold rounded-[24px] 
+                bg-gradient-to-r from-white/40 to-blue-600
+                text-blue-800 shadow-[0_4px_15px_rgba(30,144,255,0.6)]
+                hover:shadow-[0_6px_20px_rgba(30,144,255,1)]
+                transition-all duration-200 ease-in-out ml-4">
+                JOIN US
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu md:hidden bg-white dark:bg-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a class="block px-3 py-2 text-blue-700 font-medium">HOME</a>
+                <a href="#services" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">SERVICES</a>
+                <a href="#about" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">ABOUT US</a>
+                <a href="#platform" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Platform</a>
+                <a href="#testinomial" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Testinomial</a>
+                <a href="#doctor" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">FIND DOCTOR</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">CONTACT US</a>
+                <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+                    <button 
+                        id="mobile-toggle-btn"
+                        class="w-full text-left px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                        <span id="mobile-theme-icon">🌙</span> Toggle Theme
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- hero -->
+    <section class="text-gray-600 body-font px-4 md:ml-[100px]" id="hero">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+            <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                <h1 data-aos="fade-right"
+                data-aos-delay="100"
+                class="title-font sm:text-4xl lg:text-5xl mb-4 font-extrabold text-gray-900 dark:text-white">Your <span class="text-blue-500 text-shadow-lg/20">Trusted Partner</span>
+                    <br class="hidden lg:inline-block">in Digital Healthcare
+                </h1>
+                <p data-aos="fade-right"
+                data-aos-delay="400"
+                class="mb-8 leading-relaxed dark:text-gray-300"><span class="text-blue-500 font-medium">Empowering Your Health at Every Step.</span> Experience personalized medical care from the comfort of your home. Connect with <span  class="text-blue-500 font-medium">certified doctors,</span> or manage prescriptions, and schedule appointments with ease. Ready to take control of your health? <span  class="text-blue-500 font-medium">Get Started </span>or Book an Appointment today.</p>
+                <div class="flex justify-center">
+                    <button class="inline-flex items-center py-2 px-6 
+                text-lg font-semibold rounded-lg 
+                bg-gradient-to-r from-white/40 to-blue-600
+                text-blue-800 shadow-[0_4px_15px_rgba(30,144,255,0.6)]
+                hover:shadow-[0_6px_20px_rgba(30,144,255,0.8)]
+                transition-all duration-500 flex justify-center"
+                    data-aos="fade-right"
+                    data-aos-delay="300" id="booked">Book an Appointment 🩺</button>
+                </div>
+
+                <!-- logos -->
+                <div class="mt-5" data-aos="fade-right" >
+                    <p class="dark:text-gray-300">Trusted by millions across the globe:</p>
+                    <img src="./assets/images/Group 10.png" alt="" class="mt-2 hover:scale-105 transition-transform duration-500 ease-in-out hover:drop-shadow-[0_4px_15px_rgba(30,144,255,1)] max-w-full">
+                </div>
+                <!-- logos -->
+            </div>
+            <!-- image -->
+            <div class="relative lg:max-w-lg lg:w-full md:w-1/2 w-5/6"
+                data-aos="fade-up"
+                data-aos-offset="200"
+                data-aos-easing="ease-out-cubic">
+
+                <!-- Main Image -->
+                <img class="object-cover object-center rounded w-full hover:scale-105 transition-transform duration-500 ease-in-out 
+                        hover:drop-shadow-[0_4px_15px_rgba(30,144,255,0.5)]"
+                    alt="hero"
+                    src="./assets/images/Group 1.png">
+
+                <!-- Right Side Floating Card -->
+                <div class="absolute top-1/2 right-0 translate-y-[-50%] md:right-[-20px]
+                            bg-white dark:bg-gray-700 rounded-2xl shadow-xl 
+                            p-4 w-48 md:w-60 
+                            flex items-start gap-3
+                            animate-floatIn">
+
+                    <!-- Profile pictures -->
+                    <div class="flex -space-x-2">
+                        <img src="https://i.pravatar.cc/40?img=1" class="w-8 h-8 rounded-full border-2 border-white" />
+                        <img src="https://i.pravatar.cc/40?img=2" class="w-8 h-8 rounded-full border-2 border-white" />
+                        <img src="https://i.pravatar.cc/40?img=3" class="w-8 h-8 rounded-full border-2 border-white" />
+                        <img src="https://i.pravatar.cc/40?img=4" class="w-8 h-8 rounded-full border-2 border-white" />
+                    </div>
+
+                    <!-- Text content -->
+                    <div class="flex flex-col leading-tight">
+                        <h4 class="text-gray-900 dark:text-white font-semibold text-sm"> 2400+</h4>
+                        <p class="text-blue-600 font-medium text-sm">Happy Customers</p>
+
+                        <div class="flex items-center text-yellow-400 text-xs mt-1">
+                            ⭐⭐⭐⭐⭐
+                            <span class="text-gray-500 dark:text-gray-300 text-[10px] ml-1">(4.7 Stars)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- hero -->
+
+    <!-- main -->
+
+    <!-- about -->
+    <!-- after logo -->
+    <!-- Appointment Form Section -->
+    <section class="mt-20 px-4">
+        <div class="container mx-auto">
+
+            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-3xl border border-blue-300/40 p-6 md:p-8 max-w-5xl mx-auto hover:shadow-blue-500 transition-shadow duration-500 ease-in-out"
+                data-aos="fade-up"
+                data-aos-delay="100">
+
+                <!-- Heading -->
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                    Easily book an appointment in <span class="text-blue-600">3 simple steps.</span>
+                </h2>
+
+                <!-- Form Container -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+
+                    <!-- Email Field -->
+                    <div>
+                        <label class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-1">
+                            <i class="text-blue-500 text-lg">✉️</i> Email Address
+                        </label>
+                        <input type="email"
+                            class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:outline-none
+                                focus:ring-2 focus:ring-blue-400"
+                            placeholder="Enter Your Email Address" />
+                    </div>
+
+                    <!-- Contact Number -->
+                    <div>
+                        <label class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-1">
+                            <i class="text-blue-500 text-lg">📞</i> Contact Number
+                        </label>
+                        <input type="text"
+                            class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:outline-none
+                                focus:ring-2 focus:ring-blue-400"
+                            placeholder="Enter Your Contact Number" />
+                    </div>
+
+                    <!-- Appointment Date -->
+                    <div>
+                        <label class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-1">
+                            <i class="text-blue-500 text-lg">📅</i> Date of Appointment
+                        </label>
+                        <input type="date"
+                            class="w-full p-3 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:outline-none
+                                focus:ring-2 focus:ring-blue-400" />
+                    </div>
+
+                    <!-- Book Now Button -->
+                    <div class="flex justify-start md:justify-end">
+                        <button
+                            class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white 
+                                px-8 py-3 rounded-xl font-semibold shadow-lg transition-all
+                                flex items-center justify-center gap-2" id="booked2">
+                            Book Now ✔
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about -->
+
+    <!-- services -->
+    <section class="text-gray-600 body-font" id="services">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap w-full mb-20 flex-col items-center text-center " data-aos="fade-up" data-aos-delay="100">
+                <h1 class="sm:text-3xl lg:text-5xl font-bold title-font mb-2 underline mb-6 dark:text-white">Top <span class="text-blue-500">services</span> we offer</h1>
+                <p class="lg:w-1/2 w-full leading-relaxed text-black dark:text-gray-300">In today's fast-paced world, your health deserves the utmost<span class="text-blue-500 font-bold"> attention and convenience </span>. That's why <span class="text-blue-500 font-bold">HealNet</span> offers a suite of integrated services designed to cater to your healthcare needs digitally:</p>
+            </div>
+            <div class="flex flex-wrap -m-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+                <!-- card 1 -->
+                <div class="xl:w-2/3 md:w-full p-4">
+                    <div class="p-6 rounded-lg border-2 border-blue-500 w-full hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+                        <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-red-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 hover:text-gray-700 hover:rotate-12" viewBox="0 0 24 24">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-blue-700 font-medium title-font mb-2 underline">Online Consultations</h2>
+                        <p class="leading-relaxed text-base dark:text-gray-300">Consult with <span class="text-blue-500 font-bold">top doctors</span> across various <span class="text-blue-500 font-bold">medical</span> specialties via video or chat communication. It's totally <span class="text-blue-500 font-bold">secure, private, and convenient.</span> Choose the best time for an in-person visit with our easy-to-use scheduling system, or proceed with our <span class="text-blue-500 font-bold">online consultation</span>.</p>
+                    </div>
+                </div>
+                <!-- card 3 -->
+                <div class="xl:w-1/3 md:w-1/2 p-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6 rounded-lg border-2 border-blue-500 w-full h-full hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+                        <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-red-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 hover:text-gray-700 hover:rotate-12" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-blue-700 font-medium title-font mb-2 underline">Booking Appointments</h2>
+                        <p class="leading-relaxed text-base dark:text-gray-300">Choose the <span class="text-blue-500 font-bold">best time</span> for an in-person visit with our <span class="text-blue-500 font-bold">easy-to-use scheduling system</span>, or proceed with our online <span class="text-blue-500 font-bold">consultation features</span>.</p>
+                    </div>
+                </div>
+                <!-- card4 -->
+                <div class="xl:w-1/3 md:w-1/2 p-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="border-2 border-blue-500 p-6 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+                        <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-red-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 hover:text-gray-700 hover:rotate-12" viewBox="0 0 24 24">
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-blue-700 font-medium title-font mb-2 underline">Prescriptions</h2>
+                        <p class="leading-relaxed text-base dark:text-gray-300">Receive and renew <span class="text-blue-500 font-bold">prescriptions</span> digitally after your <span class="text-blue-500 font-bold">consultation</span> with our <span class="text-blue-500 font-bold">specialists</span>.</p>
+                    </div>
+                </div>
+                <!-- card 5 -->
+                <div class="xl:w-1/3 md:w-1/2 p-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="border-2 border-blue-500 p-6 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+                        <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-red-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 hover:text-gray-700 hover:rotate-12" viewBox="0 0 24 24">
+                                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-blue-700 font-medium title-font mb-2 underline">Medical Notes</h2>
+                        <p class="leading-relaxed text-base dark:text-gray-300">Obtain necessary <span class="text-blue-500 font-bold">medical notes</span> for work or school with only a few clicks of hassle.</p>
+                    </div>
+                </div>
+                <!-- card 6 -->
+                <div class="xl:w-1/3 md:w-1/2 p-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="border-2 border-blue-500 p-6 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+                        <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-red-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 hover:text-gray-700 hover:rotate-12" viewBox="0 0 24 24">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-blue-700 font-medium title-font mb-2 underline">Medicine Refills</h2>
+                        <p class="leading-relaxed text-base dark:text-gray-300">Skip the pharmacy queues and save time + energy by ordering medicine refills online.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services -->
+
+    <!-- story -->
+    <section class="text-gray-600 body-font border-2 border-blue-500 rounded-lg mx-4 md:mx-10 my-10 hover:translate-x-2 md:hover:translate-x-5 transition-transform duration-500 ease-in-out dark:bg-gray-800" id="about">
+        <div>
+            <h1 class="sm:text-3xl lg:text-5xl font-bold title-font mb-6 mt-10 text-center dark:text-white"><span class="text-blue-500">HealNet's Story:</span> Get to know us</h1>
+        </div>
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+            <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+                <img class="object-cover object-center rounded w-full hover:scale-105 transition-transform duration-500 ease-in-out hover:drop-shadow-[0_4px_15px_rgba(30,144,255,0.5)]" alt="hero" src="./assets/images/Female doc.png">
+            </div>
+            <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+                <!-- text according to heading -->
+                <p class="mb-8 leading-relaxed dark:text-gray-300">
+                    At HealNet, our journey began with a simple yet powerful vision: to make quality healthcare accessible to everyone, everywhere. Founded by a team of passionate healthcare professionals and tech enthusiasts, we recognized the challenges many face in accessing timely medical care. Our mission is to bridge this gap by leveraging technology to connect patients with top-tier medical expertise from the comfort of their homes. Over the years, we've grown into a trusted platform, committed to innovation, compassion, and excellence in healthcare delivery. Join us as we continue to revolutionize the way healthcare is experienced, one consultation at a time.
+                </p>
+                <div class="flex justify-center">
+                    <button class="inline-flex items-center py-2 px-6 
+                text-lg font-semibold rounded-[24px] 
+                bg-gradient-to-r from-white/40 to-blue-600
+                text-blue-800 shadow-[0_4px_15px_rgba(30,144,255,0.6)]
+                hover:shadow-[0_6px_20px_rgba(30,144,255,1)]
+                transition-all duration-200 ease-in-out">Learn More About us</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- story -->
+
+    <br>
+
+    <!-- platform -->
+    <section class="text-gray-600 body-font" id="platform">
+        <div>
+            <h1 class="sm:text-3xl lg:text-5xl font-bold title-font mb-6 mt-10 text-center dark:text-white">How <span class="text-blue-500">Our Platform</span> Works</h1>
+        </div>
+        <div class="container px-5 py-24 mx-auto flex flex-wrap">
+            <div class="flex flex-wrap w-full">
+                <div class="lg:w-2/5 md:w-full md:pr-10 md:py-6">
+                    <div class="flex relative pb-12">
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-gray-200 pointer-events-none dark:bg-gray-600"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-200 inline-flex items-center justify-center text-red-500 relative z-10 hover:rotate-20">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-grow pl-4">
+                            <h2 class="font-medium title-font text-2xl text-blue-500 mb-2 underline tracking-wider">Create Your Profile</h2>
+                            <p class="leading-relaxed dark:text-gray-300">
+                                Sign up and create your personal profile by providing essential details such as your medical history, current medications, and preferred consultation times.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex relative pb-12">
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-gray-200 pointer-events-none dark:bg-gray-600"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-200 inline-flex items-center justify-center text-red-500 relative z-10 hover:rotate-20">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-grow pl-4">
+                            <h2 class="font-medium title-font text-2xl text-blue-500 mb-2 underline tracking-wider">Choose Your Services</h2>
+                            <p class="leading-relaxed dark:text-gray-300">
+                                Browse through our wide range of medical services and select the one that best fits your needs, whether it's a general consultation, specialist advice, or prescription refills.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex relative pb-12">
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-gray-200 pointer-events-none dark:bg-gray-600"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-200 inline-flex items-center justify-center text-red-500 relative z-10 hover:rotate-20">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                <circle cx="12" cy="5" r="3"></circle>
+                                <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-grow pl-4">
+                            <h2 class="font-medium title-font text-2xl text-blue-500 mb-2 underline tracking-wider">Meet Your Doctor</h2>
+                            <p class="leading-relaxed dark:text-gray-300">
+                                Connect with our certified medical professionals through secure video calls or chat, receive your diagnosis, and get prescriptions delivered to your doorstep.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <img class="lg:w-3/5 md:w-full object-cover object-center rounded-lg md:mt-0 mt-12 m-auto hover:scale-105 transition-transform duration-500 ease-in-out 
+                        hover:drop-shadow-[0_4px_15px_rgba(30,144,255,0.5)]" 
+                        data-aos="fade-up"
+                        data-aos-offset="200"
+                        data-aos-easing="ease-out-cubic"
+                        src="./assets/images/Frame 18.png" alt="step">
+            </div>
+        </div>
+    </section>
+    <!-- platform -->
+
+    <!-- testinomial -->
+
+    <!-- heading -->
+    <div class="w-full text-center bg-neutral-primary-soft p-6 rounded-base shadow-xs dark:bg-gray-800" id="testinomial">
+        <h2 class="mb-3 text-3xl md:text-5xl tracking-tight font-bold text-heading dark:text-white"><span class="text-blue-500 font-medium">Patient's testinomial</span></h2>
+        <h3 class="mb-3 text-xl md:text-2xl tracking-tight font-semibold text-heading dark:text-white">Hear from Those We've Cared For</h3>
+        <p class="text-base text-sm sm:text-lg dark:text-gray-300">
+            Discover how HealNet has transformed the healthcare experience for our patients. 
+        </p>
+    </div>
+
+    <!-- cards -->
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex flex-wrap">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 lg:w-1/2 md:w-full">
+                    <div class="flex rounded-[24px] border-2 border-blue-500 hover:translate-x-2 md:hover:translate-x-5 transition-transform duration-500 ease-in-out hover:drop-shadow-[0_4px_15px_rgba(30,144,255,0.5)] border-opacity-50 p-8 sm:flex-row flex-col bg-gray-100 dark:bg-gray-700">
+                        <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                            <img src="./assets/images/test1.png" alt="">
+                        </div>
+                        <div class="flex-grow">
+                            <p class="text-black dark:text-white p-5"><span class="text-blue-500 font-bold text-2xl">"</span>
+                                HealNet made it so easy to consult with a doctor from home. The process was seamless, and I received my prescription quickly. Highly recommend!
+                                <span class="text-blue-500 font-bold text-2xl">"</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 lg:w-1/2 md:w-full">
+                    <div class="flex border-2 rounded-[24px] border-blue-500 border-opacity-50 p-8 sm:flex-row flex-col
+                        border-2 border-blue-500 hover:translate-x-2 md:hover:translate-x-5 transition-transform duration-500 ease-in-out hover:drop-shadow-[0_4px_15px_rgba(30,144,255,0.5)] bg-gray-100 dark:bg-gray-700">
+                        <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                            <img src="./assets/images/tail2.avif" alt="">
+                        </div>
+                        <div class="flex-grow p-3">
+                            <p class="dark:text-white">
+                                <span class="text-blue-500 font-bold text-2xl">"</span>
+                                The doctors on HealNet were professional and attentive. I felt heard and cared for throughout my consultation. The convenience of booking an appointment online is unmatched.
+                                <span class="text-blue-500 font-bold text-2xl">"</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- numbers -->
+    <div class="flex  justify-center">
+        <div class="w-full md:w-1/4 text-center p-6 m-4 hover:border-blue-500 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+            <p class="text-4xl md:text-6xl text-blue-500">10,000 +</p>
+            <br>
+            <p class="dark:text-white">Successful Consultations</p>
+        </div>
+        <div class="w-full md:w-1/4 text-center p-6 m-4 hover:border-blue-500 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+            <p class="text-4xl md:text-6xl text-blue-500">2500 +</p>
+            <br>
+            <p class="dark:text-white">Healthcare Professions</p>
+        </div>
+        <div class="w-full md:w-1/4 text-center p-6 m-4 hover:border-blue-500 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+            <p class="text-4xl md:text-6xl text-blue-500">98%</p>
+            <br>
+            <p class="dark:text-white">Patient Satisfaction Rate</p>
+        </div>
+        <div class="w-full md:w-1/4 text-center p-6 m-4 hover:border-blue-500 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+            <p class="text-4xl md:text-6xl text-blue-500">200 +</p>
+            <br>
+            <p class="dark:text-white">Top Specialists</p>
+        </div>
+    </div>
+
+    <!-- card 2 -->
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex flex-wrap">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 lg:w-1/2 md:w-full">
+                    <div class="flex rounded-[24px] border-2 border-blue-500 hover:translate-x-2 md:hover:translate-x-5 transition-transform duration-500 ease-in-out hover:drop-shadow-[0_4px_15px_rgba(30,144,255,0.5)] border-opacity-50 p-8 sm:flex-row flex-col bg-gray-100 dark:bg-gray-700">
+                        <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                            <img src="./assets/images/tail3.png" alt="">
+                        </div>
+                        <div class="flex-grow">
+                            <p class="text-black dark:text-white p-5"><span class="text-blue-500 font-bold text-2xl">"</span>
+                                HealNet made it so easy to consult with a doctor from home. The process was seamless, and I received my prescription quickly. Highly recommend!
+                                <span class="text-blue-500 font-bold text-2xl">"</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 lg:w-1/2 md:w-full">
+                    <div class="flex border-2 rounded-[24px] border-blue-500 border-opacity-50 p-8 sm:flex-row flex-col
+                        border-2 border-blue-500 hover:translate-x-2 md:hover:translate-x-5 transition-transform duration-500 ease-in-out hover:drop-shadow-[0_4px_15px_rgba(30,144,255,0.5)] bg-gray-100 dark:bg-gray-700">
+                        <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                            <img src="./assets/images/tail4.webp" alt="">
+                        </div>
+                        <div class="flex-grow p-3">
+                            <p class="dark:text-white">
+                                <span class="text-blue-500 font-bold text-2xl">"</span>
+                                The doctors on HealNet were professional and attentive. I felt heard and cared for throughout my consultation. The convenience of booking an appointment online is unmatched.
+                                <span class="text-blue-500 font-bold text-2xl">"</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- testinomial -->
+
+    <!-- specialist -->
+    <section class="py-16 px-4 md:px-10 lg:px-20" id="doctor">
+        <!-- Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
+                <span class="text-blue-500">Masters of Medicine:</span>
+                <br />
+                Meet our team of specialists
+            </h2>
+
+            <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                Our team of specialists is at the forefront of medical innovation. Each specialist brings a unique blend of expertise, empathy, and experience to ensure that your health is in the best hands.
+            </p>
+        </div>
+
+        <!-- Doctor Card 1 -->
+        <div class="bg-gradient-to-r from-blue-400 to-blue-600 rounded-3xl p-6 md:p-10 shadow-lg flex flex-col md:flex-row items-center gap-6 w-full max-w-4xl m-auto mb-8"
+            data-aos="fade-left" data-aos-delay="200">
+
+            <img src="./assets/images/Female doc.png" 
+                class="h-40 md:w-48 md:h-48 object-contain rounded-xl shadow-md" 
+                alt="Doctor">
+
+            <div class="text-white">
+                <h3 class="text-2xl font-bold">
+                    Dr.Lucy Jack<span class="text-white/80">(Cardiologist)</span>
+                </h3>
+                <p class="mt-3 text-white/90 leading-relaxed max-w-xl">
+                    Dr. Lucy Jack is a visionary in cardiology, advancing treatments for heart health with a compassionate, patient-centered approach. Her dedication to clinical excellence and patient education has made her a leader in cardiovascular care.
+                </p>
+
+                <button class="mt-5 bg-white text-blue-600 px-6 py-2 rounded-lg font-medium shadow 
+                            hover:shadow-lg transition flex items-center gap-2">
+                    Book appointment 
+                    <span>📞</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Doctor Card 2 -->
+        <div class="bg-gradient-to-r from-blue-400 to-blue-600 rounded-3xl p-6 md:p-10 shadow-lg flex flex-col md:flex-row items-center gap-6 w-full max-w-4xl m-auto"
+            data-aos="fade-left" data-aos-delay="200">
+
+            <img src="./assets/images/Group 1.png" 
+                class="w-40 h-40 md:w-48 md:h-48 object-cover rounded-xl shadow-md" 
+                alt="Doctor">
+
+            <div class="text-white">
+                <h3 class="text-2xl font-bold">
+                    Dr. Mark Lee <span class="text-white/80">(Dermatologist)</span>
+                </h3>
+                <p class="mt-3 text-white/90 leading-relaxed max-w-xl">
+                    Dr. Lee is a visionary in dermatology, advancing treatments for skin health with a gentle, holistic approach. His dedication to clinical excellence and patient education has made him a leader in dermatological care.
+                </p>
+
+                <button class="mt-5 bg-white text-blue-600 px-6 py-2 rounded-lg font-medium shadow 
+                            hover:shadow-lg transition flex items-center gap-2">
+                    Book appointment 
+                    <span>📞</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- specialist -->
+
+    <!-- contact -->
+    <section class="text-gray-600 body-font relative">
+        <div class="container px-5 py-24 mx-auto border-2 border-blue-300 rounded-[24px] dark:bg-gray-800" id="contact">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 dark:text-white">Reach our <span class="text-blue-500 font-bold">Help Desk </span>for support</h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base dark:text-gray-300">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
+            </div>
+            <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                <div class="flex flex-wrap -m-2">
+                    <div class="p-2 w-full md:w-1/2">
+                        <div class="relative">
+                            <label for="name" class="leading-7 text-sm text-gray-600 dark:text-gray-300">Name</label>
+                            <input type="text" id="name" name="name" class="w-full bg-gray-100 dark:bg-gray-700 dark:text-white bg-opacity-50 rounded border border-gray-300 dark:border-gray-600 focus:border-indigo-500 focus:bg-white dark:focus:bg-gray-600 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                    </div>
+                    <div class="p-2 w-full md:w-1/2">
+                        <div class="relative">
+                            <label for="email" class="leading-7 text-sm text-gray-600 dark:text-gray-300">Email</label>
+                            <input type="email" id="email" name="email" class="w-full bg-gray-100 dark:bg-gray-700 dark:text-white bg-opacity-50 rounded border border-gray-300 dark:border-gray-600 focus:border-indigo-500 focus:bg-white dark:focus:bg-gray-600 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                    </div>
+                    <div class="p-2 w-full">
+                        <div class="relative">
+                            <label for="message" class="leading-7 text-sm text-gray-600 dark:text-gray-300">Message</label>
+                            <textarea id="message" name="message" class="w-full bg-gray-100 dark:bg-gray-700 dark:text-white bg-opacity-50 rounded border border-gray-300 dark:border-gray-600 focus:border-indigo-500 focus:bg-white dark:focus:bg-gray-600 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                        </div>
+                    </div>
+                    <div class="p-2 w-full flex justify-center md:justify-start">
+                        <button class="inline-flex items-center py-2 px-6 
+                    text-lg font-semibold rounded-[24px] 
+                    bg-gradient-to-r from-white/40 to-blue-600
+                    text-blue-800 shadow-[0_4px_15px_rgba(30,144,255,0.6)]
+                    hover:shadow-[0_6px_20px_rgba(30,144,255,1)]
+                    transition-all duration-200 ease-in-out">contact us-></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- contact -->
+
+    <!-- footer -->
+    <footer class="text-gray-600 body-font bg-gray-50 dark:bg-gray-800">
+        <div class="container px-5 py-16 mx-auto flex md:items-start md:flex-row flex-col">
+            <!-- Logo & About -->
+            <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left mb-8 md:mb-0">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900 dark:text-white mb-4">
+                    <img src="./assets/images/logo (1).png" alt="">
+                </a>
+                <p class="text-gray-500 dark:text-gray-300 text-sm">Providing top-notch medical services and compassionate care to help you live healthier and happier.</p>
+            </div>
+
+            <!-- Links -->
+            <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4 mb-6 md:mb-0">
+                    <h2 class="title-font font-medium text-gray-900 dark:text-white tracking-widest text-sm mb-3">SERVICES</h2>
+                    <nav class="list-none mb-10">
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Cardiology</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Neurology</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Pediatrics</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Emergency Care</a></li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4 mb-6 md:mb-0">
+                    <h2 class="title-font font-medium text-gray-900 dark:text-white tracking-widest text-sm mb-3">RESOURCES</h2>
+                    <nav class="list-none mb-10">
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Blog</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">FAQ</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Patient Guide</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Health Tips</a></li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4 mb-6 md:mb-0">
+                    <h2 class="title-font font-medium text-gray-900 dark:text-white tracking-widest text-sm mb-3">COMPANY</h2>
+                    <nav class="list-none mb-10">
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">About Us</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Careers</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Partners</a></li>
+                        <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">Contact</a></li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 dark:text-white tracking-widest text-sm mb-3">FOLLOW US</h2>
+                    <nav class="list-none mb-10 flex gap-4 justify-center md:justify-start">
+                        <a class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white" aria-label="Facebook">
+                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5 text-blue-500 hover:rotate-12" viewBox="0 0 24 24">
+                                <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                                <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                            </svg>
+                        </a>
+                        <a class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white" aria-label="Twitter">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5 text-blue-500 hover:rotate-12" viewBox="0 0 24 24">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                            </svg>
+                        </a>
+                        <a class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white" aria-label="Instagram">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5 text-blue-500 hover:rotate-12" viewBox="0 0 24 24">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                            </svg>
+                        </a>
+                        <a class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white" aria-label="LinkedIn">
+                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5 text-blue-500 hover:rotate-12" viewBox="0 0 24 24">
+                                <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                                <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="bg-gray-100 dark:bg-gray-900 text-center">
+            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row items-center justify-between text-center">
+                <p class="text-gray-500 dark:text-gray-300 text-sm text-center sm:text-left">© 2025 HealthCare — All rights reserved Made by Iqra Aslam</p>
+                <span class="inline-flex mt-2 sm:mt-0">
+                    <a href="#" class="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white ml-4">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white ml-4">Terms of Service</a>
+                </span>
+            </div>
+        </div>
+    </footer>
+    <!-- footer -->
+
+    <!-- cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <!-- js -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 2000, // speed
+            once: false     // false = har bar scroll pr animate hoti rahe
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Dark mode toggle
+        const toggleBtn = document.getElementById('toggle-btn');
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+        
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark');
+            themeIcon.textContent = '☀️';
+            mobileThemeIcon.textContent = '☀️';
+        } else {
+            document.body.classList.remove('dark');
+            themeIcon.textContent = '🌙';
+            mobileThemeIcon.textContent = '🌙';
+        }
+        
+        function toggleTheme() {
+            if (document.body.classList.contains('dark')) {
+                document.body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.textContent = '🌙';
+                mobileThemeIcon.textContent = '🌙';
+            } else {
+                document.body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.textContent = '☀️';
+                mobileThemeIcon.textContent = '☀️';
+            }
+        }
+        
+        toggleBtn.addEventListener('click', toggleTheme);
+        mobileToggleBtn.addEventListener('click', toggleTheme);
+
+        // Book appointment buttons
+        const bookedButtons = document.querySelectorAll('#booked, #booked2');
+        
+        bookedButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                Swal.fire({
+                    title: 'Appointment Booked!',
+                    text: 'Your appointment has been successfully scheduled.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
