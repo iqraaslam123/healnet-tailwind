@@ -116,7 +116,7 @@
                 bg-gradient-to-r from-white/40 to-blue-600
                 text-blue-800 shadow-[0_4px_15px_rgba(30,144,255,0.6)]
                 hover:shadow-[0_6px_20px_rgba(30,144,255,1)]
-                transition-all duration-200 ease-in-out ml-4">
+                transition-all duration-200 ease-in-out ml-4" id="join">
                 JOIN US
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
                         <path d="M5 12h14M12 5l7 7-7 7"></path>
@@ -136,11 +136,11 @@
                 <a href="#doctor" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">FIND DOCTOR</a>
                 <a href="#contact" class="block px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">CONTACT US</a>
                 <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-                    <button 
+                    <!-- <button 
                         id="mobile-toggle-btn"
                         class="w-full text-left px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
                         <span id="mobile-theme-icon">🌙</span> Toggle Theme
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
@@ -778,7 +778,34 @@
             mobileMenu.classList.toggle('open');
         });
 
-      
+      const bookedButton = document.getElementById('booked');
+        bookedButton.addEventListener('click', () => {
+            Swal.fire({
+                title: 'Appointment Booked!',
+                text: 'Your appointment has been successfully booked.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+
+        const bookedButton2 = document.getElementById('booked2');
+        bookedButton2.addEventListener('click', () => {
+            Swal.fire({
+                title: 'Appointment Booked!',
+                text: 'Your appointment has been successfully booked.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+        const bookedjoin = document.getElementById('join');
+        bookedjoin.addEventListener('click', () => {
+            Swal.fire({
+                title: 'Joining Confirmed!',
+                text: 'Congratulations! 👍 You have successfully joined.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
     </script>
 </body>
 </html>
