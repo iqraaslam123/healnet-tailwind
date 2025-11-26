@@ -508,7 +508,7 @@
 
     <!-- numbers -->
     <div class="flex md:flex md:flex-wrap sm:flex-wrap justify-center">
-        <div class="w-full md:w-1/4 text-center p-6 m-4 hover:border-blue-500 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
+        <div class="w-full  md:w-1/4 text-center p-6 m-4 hover:border-blue-500 rounded-lg hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-[0_4px_15px_rgba(30,144,255,0.5)] dark:bg-gray-800">
             <p class="text-4xl md:text-6xl text-blue-500">10,000 +</p>
             <br>
             <p class="dark:text-white">Successful Consultations</p>
@@ -778,77 +778,7 @@
             mobileMenu.classList.toggle('open');
         });
 
-        // Dark mode toggle
-        const toggleBtn = document.getElementById('toggle-btn');
-        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
-        const themeIcon = document.getElementById('theme-icon');
-        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
-        
-        // Check for saved theme preference or respect OS preference
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        const currentTheme = localStorage.getItem('theme');
-        
-        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-            document.body.classList.add('dark');
-            themeIcon.textContent = '☀️';
-            mobileThemeIcon.textContent = '☀️';
-        } else {
-            document.body.classList.remove('dark');
-            themeIcon.textContent = '🌙';
-            mobileThemeIcon.textContent = '🌙';
-        }
-        
-        function toggleTheme() {
-            if (document.body.classList.contains('dark')) {
-                document.body.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeIcon.textContent = '🌙';
-                mobileThemeIcon.textContent = '🌙';
-            } else {
-                document.body.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                themeIcon.textContent = '☀️';
-                mobileThemeIcon.textContent = '☀️';
-            }
-        }
-        
-        toggleBtn.addEventListener('click', toggleTheme);
-        mobileToggleBtn.addEventListener('click', toggleTheme);
-
-        // Book appointment buttons
-        const bookedButtons = document.querySelectorAll('#booked, #booked2');
-        
-        bookedButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                Swal.fire({
-                    title: 'Appointment Booked!',
-                    text: 'Your appointment has been successfully scheduled.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // Close mobile menu if open
-                    mobileMenu.classList.remove('open');
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+      
     </script>
 </body>
 </html>
